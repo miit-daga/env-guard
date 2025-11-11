@@ -5,7 +5,7 @@
 [![Version](https://img.shields.io/badge/version-0.1.4-blue.svg)]()
 [![License](https://img.shields.io/badge/license-MIT-green.svg)]()
 
-**🤖 AI-Crafted in a Day**: This entire package was vibe-coded using MiniMax M2 LLM and GROK Code Fast 1. Zero human-written code - just pure AI creativity unleashed!
+**🤖 AI-Crafted in a Day**: This entire package was vibe-coded in 1 day using MiniMax M2 LLM and GROK Code Fast 1. Zero human-written code - just pure AI creativity unleashed!
 
 **Schema-based validator for environment variables with TypeScript support**
 

@@ -368,7 +368,7 @@ export function validateUrl(url: string, options?: UrlValidatorOptions): boolean
     return 'Invalid URL format';
   }
 
-  const protocols = options?.protocols || ['http:', 'https:', 'ftp:'];
+  const protocols = options?.protocols || ['http:', 'https:', 'ftp:', 'postgresql:', 'mysql:', 'mongodb:', 'mongodb+srv:', 'redis:', 'amqp:', 'ldap:', 'ldaps:'];
   if (!protocols.includes(parsedUrl.protocol)) {
     return `Protocol must be one of: ${protocols.join(', ')}`;
   }
