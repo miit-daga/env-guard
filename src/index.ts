@@ -1,5 +1,9 @@
 // Main entry point for env-guard library
-export const version = '0.1.0';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
+const packageJson = JSON.parse(readFileSync(join(__dirname, '..', 'package.json'), 'utf8'));
+export const version = packageJson.version;
 
 // =============================================================================
 // TYPES AND INTERFACES
@@ -24,7 +28,17 @@ export interface BaseSchemaDefinition<T = any> {
 }
 
 /**
- * Specific schema definitions for each type
+ * Specific schema definitions for each      // Type coercion for basic types
+      if (['string', 'number', 'boolean'].includes(effectiveSchema.type)) {
+        const coercedValue = coerceValue(value as string, effectiveSchema.type as 'string' | 'number' | 'boolean');
+        value = coercedValue;
+      }
+
+      // Special coercion for port type
+      if (effectiveSchema.type === 'port' && typeof value === 'string') {
+        const coercedValue = coerceValue(value, 'number');
+        value = coercedValue;
+      }
  */
 export interface StringSchemaDefinition extends BaseSchemaDefinition<string> {
   type: 'string';
@@ -261,7 +275,7 @@ export class SchemaError extends Error {
 /**
  * Type coercion function for basic types
  */
-export function coerceValue(value: any, type: 'string' | 'number' | 'boolean'): any {
+export function coerceValue(value: any, type: 'string' | 'number' | 'boolean' | 'port'): any {
   if (value === undefined || value === null) {
     return value;
   }
@@ -307,6 +321,22 @@ export function coerceValue(value: any, type: 'string' | 'number' | 'boolean'): 
       }
       
       throw new ValidationError('value', 'Cannot coerce to boolean', value, 'true/false/1/0/yes/no/on/off', stringValue, 'TypeError');
+    }
+    
+    case 'port': {
+      // Ports are treated like numbers
+      if (typeof value === 'number') {
+        if (isNaN(value) || !isFinite(value)) {
+          throw new ValidationError('value', 'Port value is invalid (NaN or infinite)', value, 'valid number');
+        }
+        return value;
+      }
+      
+      const numValue = parseFloat(value.toString());
+      if (isNaN(numValue) || !isFinite(numValue)) {
+        throw new ValidationError('value', 'Cannot coerce to port number', value, 'numeric string', String(value), 'TypeError');
+      }
+      return numValue;
     }
     
     default:
@@ -745,8 +775,8 @@ export function validateEnv(
 
     try {
       // Type coercion for basic types
-      if (['string', 'number', 'boolean'].includes(effectiveSchema.type)) {
-        const coercedValue = coerceValue(value as string, effectiveSchema.type as 'string' | 'number' | 'boolean');
+      if (['string', 'number', 'boolean', 'port'].includes(effectiveSchema.type)) {
+        const coercedValue = coerceValue(value as string, effectiveSchema.type as 'string' | 'number' | 'boolean' | 'port');
         value = coercedValue;
       }
 
