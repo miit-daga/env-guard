@@ -1,0 +1,72 @@
+{
+    "name": "@miit-daga/env-guard",
+    "version": "0.1.0",
+    "description": "Schema-based validator for environment variables with TypeScript support",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "bin": {
+        "env-guard": "bin/env-guard.js"
+    },
+    "files": [
+        "lib/",
+        "bin/",
+        "examples/",
+        "README.md",
+        "API.md",
+        "CLI.md",
+        "QUICKSTART.md",
+        "TROUBLESHOOTING.md",
+        "LICENSE"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "test": "jest",
+        "test:coverage": "jest --coverage",
+        "lint": "eslint src/**/*.ts bin/**/*.js",
+        "format": "prettier --write src/**/*.ts bin/**/*.js",
+        "dev": "node examples/basic-usage.js"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/miit-daga/env-guard.git"
+    },
+    "homepage": "https://github.com/miit-daga/env-guard#readme",
+    "bugs": {
+        "url": "https://github.com/miit-daga/env-guard/issues"
+    },
+    "keywords": [
+        "environment",
+        "validation",
+        "schema",
+        "typescript",
+        "nodejs",
+        "cli",
+        "config",
+        "dotenv",
+        "environment-variables",
+        "runtime-validation",
+        "type-coercion",
+        "express",
+        "nextjs",
+        "nestjs",
+        "microservices",
+        "api",
+        "production-ready"
+    ],
+    "author": "Miit Daga",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/jest": "^30.0.0",
+        "@types/node": "^20.0.0",
+        "@typescript-eslint/eslint-plugin": "^7.18.0",
+        "@typescript-eslint/parser": "^7.18.0",
+        "eslint": "^8.0.0",
+        "jest": "^29.0.0",
+        "prettier": "^3.0.0",
+        "ts-jest": "^29.4.5",
+        "typescript": "^5.5.4"
+    }
+}
