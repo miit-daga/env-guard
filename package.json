@@ -1,6 +1,6 @@
 {
     "name": "@miit-daga/env-guard-test",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "Schema-based validator for environment variables with TypeScript support",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
