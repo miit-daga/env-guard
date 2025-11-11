@@ -109,7 +109,7 @@ describe('CLI Integration Tests', () => {
       
       const result = JSON.parse(output);
       expect(result.success).toBe(true);
-      expect(result.data.PORT).toBe('8080');
+      expect(result.data.PORT).toBe(8080); // PORT is coerced to number
       expect(result.errors).toHaveLength(0);
     });
 

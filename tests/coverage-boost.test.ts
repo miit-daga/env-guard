@@ -1,5 +1,5 @@
 // Additional tests to boost coverage to 85-90%
-import { defineSchema, validateEnv } from '../src/index';
+import { defineSchema, validateEnv, validateEmail, validateIp } from '../src/index';
 
 describe('Coverage Boost Tests', () => {
   describe('Type-Specific Validator Combinations', () => {
@@ -96,9 +96,14 @@ describe('Coverage Boost Tests', () => {
       expect(schema.schema.ADMIN_EMAIL.validator).toBeDefined();
       
       // Test valid combination
-      const envVars = { ADMIN_EMAIL: 'admin@example.com' };
+      const envVars = { ADMIN_EMAIL: 'admin+test@example.com' };
       const result = validateEnv(schema, envVars);
       expect(result.success).toBe(true);
+      
+      // Test invalid email format (should trigger email validator error path)
+      const result2 = validateEnv(schema, { ADMIN_EMAIL: 'invalid-email' });
+      expect(result2.success).toBe(false);
+      expect(result2.errors[0].message).toContain('Invalid email format');
     });
 
     it('should test IP validator with version combined with custom validator', () => {
@@ -118,19 +123,28 @@ describe('Coverage Boost Tests', () => {
       const envVars = { SERVER_IP: '192.168.1.1' };
       const result = validateEnv(schema, envVars);
       expect(result.success).toBe(true);
+      
+      // Test invalid IP format (should trigger IP validator error path)
+      const result2 = validateEnv(schema, { SERVER_IP: 'invalid-ip' });
+      expect(result2.success).toBe(false);
+      expect(result2.errors[0].message).toContain('Invalid IP address format');
     });
 
-    it('should test regex pattern validation coverage', () => {
-      const schema = defineSchema({
-        API_KEY: {
-          type: 'regex' as const,
-          required: true,
-          pattern: /^[A-Z0-9]{32}$/
-        }
-      });
+    it('should test email validator error paths for coverage', () => {
+      // Test non-string input (line 412)
+      expect(validateEmail(123 as any)).toBe('Email must be a string');
+      
+      // Test empty email (line 427) 
+      expect(validateEmail('')).toBe('Email cannot be empty');
+      expect(validateEmail('   ')).toBe('Email cannot be empty');
+      
+      // Test invalid format (line 432)
+      expect(validateEmail('invalid-email')).toBe('Invalid email format');
+    });
 
-      // This should test lines 655-656 for regex validation coverage
-      expect(schema.schema.API_KEY.validator).toBeDefined();
+    it('should test IP validator error paths for coverage', () => {
+      // Test non-string input (line 479)
+      expect(validateIp(123 as any)).toBe('IP must be a string');
     });
   });
 

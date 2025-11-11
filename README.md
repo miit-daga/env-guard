@@ -1,8 +1,8 @@
 # 🛡️ env-guard
 
-[![Test Status](https://img.shields.io/badge/tests-115%20passing-brightgreen.svg)]()
-[![Coverage](https://img.shields.io/badge/coverage-93.91%25-brightgreen.svg)]()
-[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)]()
+[![Test Status](https://img.shields.io/badge/tests-116%20passing-brightgreen.svg)]()
+[![Coverage](https://img.shields.io/badge/coverage-94.16%25-brightgreen.svg)]()
+[![Version](https://img.shields.io/badge/version-0.1.4-blue.svg)]()
 [![License](https://img.shields.io/badge/license-MIT-green.svg)]()
 
 **🤖 AI-Crafted in a Day**: This entire package was vibe-coded using MiniMax M2 LLM and GROK Code Fast 1. Zero human-written code - just pure AI creativity unleashed!
@@ -458,8 +458,8 @@ Have questions or ideas? [Start a discussion](https://github.com/miit-daga/env-g
 
 ## 📊 Test Coverage
 
-- **115 tests passing** (100% success rate)
-- **93.91% code coverage**
+- **116 tests passing** (100% success rate)
+- **94.16% code coverage**
 - **Zero dependencies**
 - **TypeScript strict mode**
 

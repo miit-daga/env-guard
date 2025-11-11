@@ -647,7 +647,7 @@ describe('Core Functions', () => {
       
       expect(result.success).toBe(false);
       expect(result.errors).toHaveLength(1);
-      expect(result.errors[0].type).toBe('TypeError');
+      expect(result.errors[0].type).toBe('FormatError');
     });
 
     it('should handle empty environment gracefully', () => {

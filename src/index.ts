@@ -796,9 +796,9 @@ export function validateEnv(
         }
       }
 
-      // Apply built-in validators
+      // Apply built-in validators (skip for regex since it requires pattern parameter)
       const builtInValidator = (validators as any)[effectiveSchema.type];
-      if (builtInValidator) {
+      if (builtInValidator && effectiveSchema.type !== 'regex') {
         const validatorResult = builtInValidator(value);
         if (validatorResult !== true) {
           errors.push({
