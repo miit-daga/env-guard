@@ -451,7 +451,7 @@ Have questions or ideas? [Start a discussion](https://github.com/miit-daga/env-g
 **Miit Daga**
 
 💼 [LinkedIn](https://www.linkedin.com/in/miit-daga/)  
-🌐 [Website](https://miitdaga.tech/)
+🌐 [Website](https://miitdaga.dev/)
 
 ## 📊 Test Coverage
 
